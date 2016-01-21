@@ -23,21 +23,22 @@ while True:
     # 100 samples per batch
     for _ in range(100):
 
+        # collect sensor values into array
         array = []
-
         array.extend(microbit.accelerometer.get_values())
 
-        print_array("    ", array, end="\r")
-
+        # update min_array, max_array
         if min_array is None:
-            min_array = array
-            max_array = array
+            min_array, max_array = array, array
         else:
-            min_array = [min(x, y) for x, y in zip(min_array, array)]
-            max_array = [max(x, y) for x, y in zip(max_array, array)]
+            min_array = [min(v) for v in zip(min_array, array)]
+            max_array = [max(v) for v in zip(max_array, array)]
 
+        # print current and wait
+        print_array("    ", array, end="\r")
         microbit.sleep(50)
 
+    # print min/max values for last batch
     print_array("min:", min_array)
     print_array("max:", max_array)
     print()
