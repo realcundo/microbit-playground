@@ -6,24 +6,63 @@ Use something like this to run it (requires wide terminal):
   pyboard.py /dev/ttyACM0 read-sensors.py
 """
 
-import microbit
+from microbit import *
 
 def print_array(prefix, array, end="\n"):
     fmt = "{:>7}|" * len(array)
     print(prefix, fmt.format(*array), end=end)
 
 
+# discover pins
+analog_pins = []
+digital_pins = []
+touch_pins = []
+
+pin_digital_heading = ""
+pin_analog_heading = ""
+pin_touch_heading = ""
+
+for i, pin in enumerate([pin0, pin1, pin2]):
+    if pin is not None:
+        pin_str = " pin{:<2}".format(i)
+
+        # check read_analog
+        try:
+            pin.read_analog
+            analog_pins.append(pin)
+            pin_analog_heading += pin_str + "a|"
+        except AttributeError:
+            pass
+
+        # check read_digital
+        try:
+            pin.read_digital
+            digital_pins.append(pin)
+            pin_digital_heading += pin_str + "d|"
+        except AttributeError:
+            pass
+
+        # check is_touched
+        try:
+            pin.is_touched
+            touch_pins.append(pin)
+            pin_touch_heading += pin_str + "t|"
+        except AttributeError:
+            pass
+
+
 # calibrate the compass
-microbit.compass.calibrate()
+compass.calibrate()
 print("Calibrating compass. Please spin the micro:bit", end="")
 
-while microbit.compass.is_calibrating():
-    microbit.sleep(400)
+while compass.is_calibrating():
+    sleep(400)
     print(".", end="")
 
 print(" Calibrated!")
 
 
+# main loop
 while True:
 
     min_array, max_array = None, None
@@ -38,6 +77,9 @@ while True:
           " comp_y|"
           " comp_z|"
           " comp_h|"
+          + pin_analog_heading
+          + pin_digital_heading
+          + pin_touch_heading
          )
 
     # 100 samples per batch
@@ -45,15 +87,24 @@ while True:
 
         # collect sensor values into array
         array = []
-        array.extend(microbit.accelerometer.get_values())
+        array.extend(accelerometer.get_values())
 
-        array.append(microbit.button_a.is_pressed())
-        array.append(microbit.button_b.is_pressed())
+        array.append(button_a.is_pressed())
+        array.append(button_b.is_pressed())
 
-        array.append(microbit.compass.get_x())
-        array.append(microbit.compass.get_y())
-        array.append(microbit.compass.get_z())
-        array.append(microbit.compass.heading())
+        array.append(compass.get_x())
+        array.append(compass.get_y())
+        array.append(compass.get_z())
+        array.append(compass.heading())
+
+        for pin in analog_pins:
+            array.append(pin.read_analog())
+
+        for pin in digital_pins:
+            array.append(pin.read_digital())
+
+        for pin in touch_pins:
+            array.append(pin.is_touched())
 
         # update min_array, max_array
         if min_array is None:
@@ -64,7 +115,7 @@ while True:
 
         # print current and wait
         print_array("    ", array, end="\r")
-        microbit.sleep(50)
+        sleep(50)
 
     # print min/max values for last batch
     print_array("min:", min_array)
