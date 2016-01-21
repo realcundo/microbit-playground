@@ -22,6 +22,8 @@ pin_digital_heading = ""
 pin_analog_heading = ""
 pin_touch_heading = ""
 
+# only include pins 0-2. Other pins can be specified (or None to skip) if
+# needed.
 for i, pin in enumerate([pin0, pin1, pin2]):
     if pin is not None:
         pin_str = " pin{:<2}".format(i)
@@ -53,14 +55,8 @@ for i, pin in enumerate([pin0, pin1, pin2]):
 
 # calibrate the compass
 compass.calibrate()
-print("Calibrating compass. Please spin the micro:bit", end="")
-
-while compass.is_calibrating():
-    sleep(400)
-    print(".", end="")
-
-print(" Calibrated!")
-
+print("Calibrating compass. Please spin the micro:bit. 'comp_c' becomes 1 once "
+      "micro:bit has been calibrated.\n")
 
 # main loop
 while True:
@@ -73,6 +69,7 @@ while True:
           "  acc_z|"
           "  btn_a|"
           "  btn_b|"
+          " comp_c|"
           " comp_x|"
           " comp_y|"
           " comp_z|"
@@ -92,6 +89,7 @@ while True:
         array.append(button_a.is_pressed())
         array.append(button_b.is_pressed())
 
+        array.append(compass.is_calibrated())
         array.append(compass.get_x())
         array.append(compass.get_y())
         array.append(compass.get_z())
