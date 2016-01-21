@@ -15,10 +15,15 @@ def print_array(prefix, array, end="\n"):
 
 while True:
 
-    min_array = None
-    max_array = None
+    min_array, max_array = None, None
 
-    print("       acc_x|  acc_y|  acc_z|")
+    print("     "
+          "  acc_x|"
+          "  acc_y|"
+          "  acc_z|"
+          "  btn_a|"
+          "  btn_b"
+         )
 
     # 100 samples per batch
     for _ in range(100):
@@ -26,6 +31,9 @@ while True:
         # collect sensor values into array
         array = []
         array.extend(microbit.accelerometer.get_values())
+
+        array.append(microbit.button_a.is_pressed())
+        array.append(microbit.button_b.is_pressed())
 
         # update min_array, max_array
         if min_array is None:
