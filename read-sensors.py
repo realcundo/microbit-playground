@@ -13,6 +13,17 @@ def print_array(prefix, array, end="\n"):
     print(prefix, fmt.format(*array), end=end)
 
 
+# calibrate the compass
+microbit.compass.calibrate()
+print("Calibrating compass. Please spin the micro:bit", end="")
+
+while microbit.compass.is_calibrating():
+    microbit.sleep(400)
+    print(".", end="")
+
+print(" Calibrated!")
+
+
 while True:
 
     min_array, max_array = None, None
@@ -22,7 +33,11 @@ while True:
           "  acc_y|"
           "  acc_z|"
           "  btn_a|"
-          "  btn_b"
+          "  btn_b|"
+          " comp_x|"
+          " comp_y|"
+          " comp_z|"
+          " comp_h|"
          )
 
     # 100 samples per batch
@@ -34,6 +49,11 @@ while True:
 
         array.append(microbit.button_a.is_pressed())
         array.append(microbit.button_b.is_pressed())
+
+        array.append(microbit.compass.get_x())
+        array.append(microbit.compass.get_y())
+        array.append(microbit.compass.get_z())
+        array.append(microbit.compass.heading())
 
         # update min_array, max_array
         if min_array is None:
