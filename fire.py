@@ -5,7 +5,6 @@ Fire simulator. Use buttons A+B to decrease/increase the flame.
 import microbit
 
 class Fire:
-
     def __init__(self, blur_factor):
         self.set_blur_factor(blur_factor)
 
@@ -43,14 +42,17 @@ class Fire:
         # - generate random pixels in the empty (bottom) row
         # - blur everything
 
-        # generate random fir row in pixels (the row would get discarded)
+        # generate random first row in pixels
+        # the row will get get discarded because of shifting up
         for x in range(5):
             self.pixels[x] = microbit.random(10)
 
-        # blur pixels_temp taking rows 0-3 from pixels rows 1-4
+        # blur pixels into pixels_temp taking
+        # rows 0-3 from pixels rows 1-4 and
+        # row 4 from random pixels row 0
         for y in range(5):
             for x in range(5):
-                v = self.get_pixel(x, y)
+                v =  self.get_pixel(x,   y)
                 v += self.get_pixel(x-1, y)
                 v += self.get_pixel(x+1, y)
 
