@@ -5,6 +5,6 @@
 * [`read-sensors.py`](http://github.com/realcundo/microbit-playground/blob/master/read-sensors.py) - reads accelerometer, compass, buttons, pins (0-2 by default) and displays current, minimum and maximum values.
 * [`dice.py`](http://github.com/realcundo/microbit-playground/blob/master/dice.py) - dice simulator (includes cheat mode!)
 * [`fire.py`](http://github.com/realcundo/microbit-playground/blob/master/fire.py) - fire simulator (no smoke, luckily)
-* *to be continued...*
+* [`light-painting.py`](http://github.com/realcundo/microbit-playground/blob/master/light-painting.py) - quick light-painting test
 
-**Note** *All scripts rely on [github.com/bbcmicrobit/micropython/tree/master/tools](http://github.com/bbcmicrobit/micropython/tree/master/tools) to some extent.*
+See [wiki](http://github.com/realcundo/microbit-playground/wiki/Micro:bit-Playground-Wiki) for reports.
