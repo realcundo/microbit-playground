@@ -7,5 +7,6 @@
 * [`fire.py`](http://github.com/realcundo/microbit-playground/blob/master/fire.py) - fire simulator (no smoke, luckily.)
 * [`light-painting.py`](http://github.com/realcundo/microbit-playground/blob/master/light-painting.py) - quick light-painting test.
 * [`drumkit.py`](http://github.com/realcundo/microbit-playground/blob/master/drumkit.py) - basic drumkit/sample sequencer. There is no UI, it just plays predefined pattern. 
+* [`lawnmower-simulator.py`](http://github.com/realcundo/microbit-playground/blob/master/lawnmower-simulator.py) - `micro:bit` adaptation of the [Advanced Lawnmower Simulator](http://www.worldofspectrum.org/infoseekid.cgi?id=0000089) game.
 
 See [wiki](http://github.com/realcundo/microbit-playground/wiki/Micro:bit-Playground-Wiki) for reports.
