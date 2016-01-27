@@ -9,4 +9,4 @@
 * [`drumkit.py`](http://github.com/realcundo/microbit-playground/blob/master/drumkit.py) - basic drumkit/sample sequencer. There is no UI, it just plays predefined pattern. 
 * [`lawnmower-simulator.py`](http://github.com/realcundo/microbit-playground/blob/master/lawnmower-simulator.py) - `micro:bit` adaptation of the [Advanced Lawnmower Simulator](http://www.worldofspectrum.org/infoseekid.cgi?id=0000089) game.
 
-See [wiki](http://github.com/realcundo/microbit-playground/wiki/Micro:bit-Playground-Wiki) for reports.
+See [wiki](http://github.com/realcundo/microbit-playground/wiki) for reports ([part 1](http://github.com/realcundo/microbit-playground/wiki/My-First-Three-Days-With-micro:bit), [part 2](http://github.com/realcundo/microbit-playground/wiki/My-Last-Three-Days-With-micro:bit)).
